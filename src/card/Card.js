@@ -90,10 +90,12 @@ export default function Cards({ languages }) {
           <Card 
             key={index} 
             sx={{
-              minWidth: 180, // Adjust as needed
-              margin: '0 8px',
+              width:230,
+              height:180,
+              margin: `0 ${8}px`,
               flex: '0 0 auto', // Prevent cards from shrinking
-              boxSizing: 'border-box',
+              position: 'relative',
+
             }}
           >
             <div style={{ position: 'relative' }}>

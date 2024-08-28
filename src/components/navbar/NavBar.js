@@ -30,6 +30,7 @@ const NavBar = () => {
                                 height: '24px',
                                 margin: '0 15px',
                                 cursor: 'pointer',
+                                marginBottom:'-4px'
                             }}
                         />
                     </span>

@@ -25,13 +25,13 @@ function Home() {
     <div className="home">
       <main>
         <section >
-          <h2 className="text-xl mb-4" style={{textAlign:'left', marginLeft:'50px'}}>Browse by Language</h2>
+          <h5 className="text-xl mb-4" style={{textAlign:'left', marginLeft:'40px',marginTop:'50px',marginBottom:'1px'}}>Browse by Language</h5>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             <Cards languages={languages} />
           </div>
         </section>
         <section >
-          <h2 className="text-xl mb-4" style={{textAlign:'left', marginLeft:'50px'}}>Browse by Genre</h2>
+          <h5 className="text-xl mb-4" style={{textAlign:'left', marginLeft:'40px',marginBottom:'10px'}}>Browse by Genre</h5>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             <GCards genres={genres} />
           </div>

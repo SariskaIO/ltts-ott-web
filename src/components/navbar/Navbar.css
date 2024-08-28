@@ -9,6 +9,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for better separation */
   z-index: 1000; /* Ensure it stays above other content */
   padding: 10px 20px; /* Adjust padding as needed */
+  font-size: 30px;
 }
 
 .headerLeft,
@@ -19,7 +20,7 @@
 
 a > span, AppsIcon {
   margin: 0 30px;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   cursor: pointer;
   color: white;
 }
