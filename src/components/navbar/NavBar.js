@@ -8,7 +8,7 @@ const NavBar = () => {
     return (
         <div className='header'>
             <div className="headerLeft">
-                <Link to="/home" style={{ textDecoration: "none" }}>
+                <Link to="/" style={{ textDecoration: "none" }}>
                     <span> Home </span>
                 </Link>
                 <Link to="/movies" style={{ textDecoration: "none" }}>
@@ -27,11 +27,10 @@ const NavBar = () => {
                     <span>
                         <AppsIcon
                             style={{
-                                height: '24px', // Adjusted for better visibility
-                                margin: '0 15px', // Adjust spacing around icon
+                                height: '24px',
+                                margin: '0 15px',
                                 cursor: 'pointer',
                             }}
-
                         />
                     </span>
                 </Link>

@@ -25,7 +25,8 @@ a > span, AppsIcon {
 }
 
 a > span:hover {
-  color: rgb(117, 184, 246);
+  /* color: rgb(117, 184, 246); */
+  text-decoration: underline;
 }
 
 .header__icon {

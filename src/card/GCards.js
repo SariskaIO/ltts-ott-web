@@ -2,10 +2,11 @@ import { CardMedia } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export default function GCards({ genres }) {
   const scrollRef = useRef(null);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   const handleScroll = (direction) => {
     if (scrollRef.current) {
@@ -14,12 +15,28 @@ export default function GCards({ genres }) {
         ? Math.min(scrollLeft + clientWidth, scrollWidth) 
         : Math.max(scrollLeft - clientWidth, 0);
       scrollRef.current.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+      setScrollPosition(scrollAmount);
     }
   };
 
+  const handleScrollEvent = () => {
+    if (scrollRef.current) {
+      setScrollPosition(scrollRef.current.scrollLeft);
+    }
+  };
+
+  useEffect(() => {
+    const ref = scrollRef.current;
+    if (ref) {
+      ref.addEventListener('scroll', handleScrollEvent);
+      return () => ref.removeEventListener('scroll', handleScrollEvent);
+    }
+  }, []);
+
   return (
     <div style={{ position: 'relative' }}>
-      <button 
+      {scrollPosition > 0 && (
+        <button 
         onClick={() => handleScroll('prev')} 
         style={{
           position: 'absolute',
@@ -36,7 +53,7 @@ export default function GCards({ genres }) {
         }}
       >
         &lt;
-      </button>
+      </button>)}
 
       <button 
         onClick={() => handleScroll('next')} 
@@ -60,12 +77,12 @@ export default function GCards({ genres }) {
       <div 
         style={{
           display: 'flex',
-          overflowX: 'auto',
+          overflowX: 'hidden',
           whiteSpace: 'nowrap',
-          maxWidth: '100%', // Ensure the container doesn't overflow the viewport
+          maxWidth: 'calc(5 * 150px + 4 * 4px + 420px)', // Ensure the container fits exactly 5 cards + margins
           scrollbarWidth: 'none', // Hide scrollbar in Firefox
           msOverflowStyle: 'none', // Hide scrollbar in IE and Edge
-          padding: '0 40px', // Add padding to ensure cards don't touch the buttons
+          padding: '0 30px', // Add padding to ensure cards don't touch the buttons
         }} 
         ref={scrollRef}
       >
@@ -102,7 +119,7 @@ export default function GCards({ genres }) {
                   width: '100%',
                 }}
               >
-                {genre.name}
+                {/* {genre.name} */}
               </Typography>
             </div>
             <CardContent sx={{

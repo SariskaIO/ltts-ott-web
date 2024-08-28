@@ -1,11 +1,11 @@
-import { CardMedia } from '@mui/material';
+import { Button, CardActions, CardMedia } from '@mui/material';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 export default function Cards({ languages }) {
   const scrollRef = useRef(null);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   const handleScroll = (direction) => {
     if (scrollRef.current) {
@@ -14,29 +14,46 @@ export default function Cards({ languages }) {
         ? Math.min(scrollLeft + clientWidth, scrollWidth) 
         : Math.max(scrollLeft - clientWidth, 0);
       scrollRef.current.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+      setScrollPosition(scrollAmount);
     }
   };
 
+  const handleScrollEvent = () => {
+    if (scrollRef.current) {
+      setScrollPosition(scrollRef.current.scrollLeft);
+    }
+  };
+
+  useEffect(() => {
+    const ref = scrollRef.current;
+    if (ref) {
+      ref.addEventListener('scroll', handleScrollEvent);
+      return () => ref.removeEventListener('scroll', handleScrollEvent);
+    }
+  }, []);
+
   return (
     <div style={{ position: 'relative' }}>
-      <button 
-        onClick={() => handleScroll('prev')} 
-        style={{
-          position: 'absolute',
-          left: '0',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          zIndex: 1,
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          color: 'white',
-          border: 'none',
-          borderRadius: '4px',
-          padding: '8px',
-          cursor: 'pointer',
-        }}
-      >
-        &lt;
-      </button>
+      {scrollPosition > 0 && (
+        <button 
+          onClick={() => handleScroll('prev')} 
+          style={{
+            position: 'absolute',
+            left: '0',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            zIndex: 1,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            padding: '8px',
+            cursor: 'pointer',
+          }}
+        >
+          &lt;
+        </button>
+      )}
 
       <button 
         onClick={() => handleScroll('next')} 
@@ -60,12 +77,12 @@ export default function Cards({ languages }) {
       <div 
         style={{
           display: 'flex',
-          overflowX: 'auto',
+          overflowX: 'hidden',
           whiteSpace: 'nowrap',
-          maxWidth: '100%', // Ensure the container doesn't overflow the viewport
+          maxWidth: 'calc(5 * 150px + 4 * 8px + 420px)', // Ensure the container fits exactly 5 cards + margins
           scrollbarWidth: 'none', // Hide scrollbar in Firefox
           msOverflowStyle: 'none', // Hide scrollbar in IE and Edge
-          padding: '0 40px', // Add padding to ensure cards don't touch the buttons
+          padding: '0 30px', // Add padding to ensure cards don't touch the buttons
         }} 
         ref={scrollRef}
       >
@@ -73,7 +90,7 @@ export default function Cards({ languages }) {
           <Card 
             key={index} 
             sx={{
-              minWidth: 150, // Adjust as needed
+              minWidth: 180, // Adjust as needed
               margin: '0 8px',
               flex: '0 0 auto', // Prevent cards from shrinking
               boxSizing: 'border-box',
@@ -82,7 +99,7 @@ export default function Cards({ languages }) {
             <div style={{ position: 'relative' }}>
               <CardMedia 
                 component="img"
-                width="150"
+                width="180"
                 height="140"
                 image={language.image}
                 alt={language.nativeName}
@@ -105,16 +122,11 @@ export default function Cards({ languages }) {
                 {language.nativeName}
               </Typography>
             </div>
-            <CardContent sx={{
-                backgroundColor:"black"
-              }}>
-              <Typography gutterBottom variant="body2" component="div"
-              sx={{color:"white",
-                textAlign: 'left'
-              }}>
+            <CardActions sx={{ backgroundColor: "black" }}>
+              <Button size="small" sx={{ color: "white" }}>
                 {language.name}
-              </Typography>
-            </CardContent>
+              </Button>
+            </CardActions>
           </Card>
         ))}
       </div>

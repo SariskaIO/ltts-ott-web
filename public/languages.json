@@ -30,8 +30,28 @@
     "image": "img/card.jpg"
   },
   {
-    "name":"Malayalam",
-    "nativeName":"മലയാളം",
+    "name": "Malayalam",
+    "nativeName": "മലയാളം",
+    "image": "img/card.jpg"
+  },
+  {
+    "name": "Punjabi",
+    "nativeName": "ਪੰਜਾਬੀ",
+    "image": "img/card.jpg"
+  },
+  {
+    "name": "Kannada",
+    "nativeName": "ಕನ್ನಡ",
+    "image": "img/card.jpg"
+  },
+  {
+    "name": "Telugu",
+    "nativeName": "తెలుగు",
+    "image": "img/card.jpg"
+  },
+  {
+    "name": "Marathi",
+    "nativeName": "मराठी",
     "image": "img/card.jpg"
   }
 ]
