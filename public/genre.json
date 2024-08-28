@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Movie",
+        "image": "https://static.vecteezy.com/system/resources/previews/001/254/680/original/cinema-background-concept-vector.jpg"
+    },
+    {
+        "name": "News",
+        "image": "https://www.forbes.com/advisor/wp-content/uploads/2023/01/News_Anchor.jpg"
+    },
+    {
+        "name": "Entertainment",
+        "image": "https://c.pxhere.com/photos/f6/8d/concert_sound_light_public_party-870980.jpg"
+    },
+    {
+        "name": "Devotional",
+        "image": ""
+    },
+    {
+        "name": "Lifestyle",
+        "image": ""
+    },
+    {
+        "name": "Sports",
+        "image": ""
+    },
+    {
+        "name": "Music",
+        "image": ""
+    },
+    {
+        "name": "Animation",
+        "image": ""
+    }
+]

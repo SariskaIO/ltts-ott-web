@@ -1,0 +1,37 @@
+[
+  {
+    "name": "English",
+    "nativeName": "English",
+    "image": "img/card.jpg"
+  },
+  {
+    "name": "Hindi",
+    "nativeName": "हिंदी",
+    "image": "img/card.jpg"
+  },
+  {
+    "name": "Bengali",
+    "nativeName": "বাংলা",
+    "image": "img/card.jpg"
+  },
+  {
+    "name": "Bhojpuri",
+    "nativeName": "भोजपुरी",
+    "image": "img/card.jpg"
+  },
+  {
+    "name": "Gujarati",
+    "nativeName": "ગુજરાતી",
+    "image": "img/card.jpg"
+  },
+  {
+    "name": "Tamil",
+    "nativeName": "தமிழ்",
+    "image": "img/card.jpg"
+  },
+  {
+    "name":"Malayalam",
+    "nativeName":"മലയാളം",
+    "image": "img/card.jpg"
+  }
+]
