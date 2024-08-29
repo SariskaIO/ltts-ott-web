@@ -1,57 +1,46 @@
 [
   {
     "name": "English",
-    "nativeName": "English",
-    "image": "img/card.jpg"
+    "image": "https://akamaividz2.zee5.com/image/upload/platform/lang/english.jpg"
   },
   {
-    "name": "Hindi",
-    "nativeName": "हिंदी",
-    "image": "img/card.jpg"
+    "name": "Hindi  ",
+    "image": "https://akamaividz2.zee5.com/image/upload/platform/lang/hindi.jpg"
   },
   {
     "name": "Bengali",
-    "nativeName": "বাংলা",
-    "image": "img/card.jpg"
+    "image": "https://akamaividz2.zee5.com/image/upload/platform/lang/bengali.jpg"
   },
   {
     "name": "Bhojpuri",
-    "nativeName": "भोजपुरी",
-    "image": "img/card.jpg"
+    "image": "https://akamaividz2.zee5.com/image/upload/platform/lang/bhojpuri.jpg"
   },
   {
     "name": "Gujarati",
-    "nativeName": "ગુજરાતી",
-    "image": "img/card.jpg"
+    "image": "https://akamaividz2.zee5.com/image/upload/platform/lang/gujrati.jpg"
   },
   {
     "name": "Tamil",
-    "nativeName": "தமிழ்",
-    "image": "img/card.jpg"
+    "image": "https://akamaividz2.zee5.com/image/upload/platform/lang/tamil.jpg"
   },
   {
     "name": "Malayalam",
-    "nativeName": "മലയാളം",
-    "image": "img/card.jpg"
+    "image": "https://akamaividz2.zee5.com/image/upload/platform/lang/malayalam.jpg"
   },
   {
     "name": "Punjabi",
-    "nativeName": "ਪੰਜਾਬੀ",
-    "image": "img/card.jpg"
+   "image": "https://akamaividz2.zee5.com/image/upload/platform/lang/punjabi.jpg"
   },
   {
     "name": "Kannada",
-    "nativeName": "ಕನ್ನಡ",
-    "image": "img/card.jpg"
+    "image": "https://akamaividz2.zee5.com/image/upload/platform/lang/kannada.jpg"
   },
   {
     "name": "Telugu",
-    "nativeName": "తెలుగు",
-    "image": "img/card.jpg"
+    "image": "https://akamaividz2.zee5.com/image/upload/platform/lang/telugu.jpg"
   },
   {
     "name": "Marathi",
-    "nativeName": "मराठी",
-    "image": "img/card.jpg"
+    "image": "https://akamaividz2.zee5.com/image/upload/platform/lang/marathi.jpg"
   }
 ]

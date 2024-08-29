@@ -79,7 +79,7 @@ export default function GCards({ genres }) {
           display: 'flex',
           overflowX: 'hidden',
           whiteSpace: 'nowrap',
-          maxWidth: 'calc(5 * 150px + 4 * 4px + 420px)', // Ensure the container fits exactly 5 cards + margins
+          maxWidth: 'calc(5 * 155px + 4 * 8px + 460px)', // Ensure the container fits exactly 5 cards + margins
           scrollbarWidth: 'none', // Hide scrollbar in Firefox
           msOverflowStyle: 'none', // Hide scrollbar in IE and Edge
           padding: '0 30px', // Add padding to ensure cards don't touch the buttons
@@ -90,18 +90,20 @@ export default function GCards({ genres }) {
           <Card 
             key={index} 
             sx={{
-              width:230,
+              width:240,
               height:180,
               margin: `0 ${8}px`,
               flex: '0 0 auto', // Prevent cards from shrinking
               position: 'relative',
+              borderRadius:'7px',
+
 
             }}
           >
             <div style={{ position: 'relative' }}>
               <CardMedia 
                 component="img"
-                width="150"
+                width="180"
                 height="140"
                 image={genre.image}
                 alt={genre.name}
@@ -129,7 +131,8 @@ export default function GCards({ genres }) {
               }}>
               <Typography gutterBottom variant="body2" component="div"
               sx={{color:"white",
-                textAlign: 'left'
+                textAlign: 'left',
+                 marginLeft:'-12px'
               }}>
                 {genre.name}
               </Typography>
