@@ -1,8 +1,57 @@
-import { CardMedia } from '@mui/material';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import React, { useEffect, useRef, useState } from 'react';
+import { CardMedia } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import React, { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
+
+const StyledCardContainer = styled.div`
+  position: relative;
+`;
+
+const ScrollButton = styled.button`
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px;
+  cursor: pointer;
+`;
+
+const CardsContainer = styled.div`
+  display: flex;
+  overflow-x: hidden;
+  white-space: nowrap;
+  padding: 0 30px;
+
+  // Responsiveness: Adjust the number of visible cards based on the screen size
+  // max-width: calc(1 * 150px + 50px); // Default for small screens
+
+  // @media (min-width: 600px) {
+  max-width: calc(
+    2 * 160px + 1 * 8px + 40px
+  ); // 2 cards for larger mobile devices
+  // }
+
+  @media (min-width: 768px) {
+    max-width: calc(4 * 170px + 3 * 8px + 50px); // 3 cards for tablets
+  }
+
+  @media (min-width: 1024px) {
+    max-width: calc(5 * 180px + 4 * 8px + 80px); // 4 cards for laptops
+  }
+
+  @media (min-width: 1440px) {
+    max-width: calc(6 * 180px + 5 * 8px + 290px); // 5 cards for larger screens
+  }
+
+  scrollbar-width: none; // Hide scrollbar in Firefox
+  -ms-overflow-style: none; // Hide scrollbar in IE and Edge
+`;
 
 export default function GCards({ genres }) {
   const scrollRef = useRef(null);
@@ -11,10 +60,11 @@ export default function GCards({ genres }) {
   const handleScroll = (direction) => {
     if (scrollRef.current) {
       const { scrollLeft, clientWidth, scrollWidth } = scrollRef.current;
-      const scrollAmount = direction === 'next' 
-        ? Math.min(scrollLeft + clientWidth, scrollWidth) 
-        : Math.max(scrollLeft - clientWidth, 0);
-      scrollRef.current.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+      const scrollAmount =
+        direction === "next"
+          ? Math.min(scrollLeft + clientWidth, scrollWidth)
+          : Math.max(scrollLeft - clientWidth, 0);
+      scrollRef.current.scrollTo({ left: scrollAmount, behavior: "smooth" });
       setScrollPosition(scrollAmount);
     }
   };
@@ -28,118 +78,78 @@ export default function GCards({ genres }) {
   useEffect(() => {
     const ref = scrollRef.current;
     if (ref) {
-      ref.addEventListener('scroll', handleScrollEvent);
-      return () => ref.removeEventListener('scroll', handleScrollEvent);
+      ref.addEventListener("scroll", handleScrollEvent);
+      return () => ref.removeEventListener("scroll", handleScrollEvent);
     }
   }, []);
 
   return (
-    <div style={{ position: 'relative' }}>
-      {scrollPosition > 0 && (
-        <button 
-        onClick={() => handleScroll('prev')} 
-        style={{
-          position: 'absolute',
-          left: '0',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          zIndex: 1,
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          color: 'white',
-          border: 'none',
-          borderRadius: '4px',
-          padding: '8px',
-          cursor: 'pointer',
-        }}
-      >
-        &lt;
-      </button>)}
-
-      <button 
-        onClick={() => handleScroll('next')} 
-        style={{
-          position: 'absolute',
-          right: '0',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          zIndex: 1,
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          color: 'white',
-          border: 'none',
-          borderRadius: '4px',
-          padding: '8px',
-          cursor: 'pointer',
-        }}
-      >
+    <StyledCardContainer>
+      {/* {scrollPosition > 0 && (
+        <ScrollButton onClick={() => handleScroll('prev')} style={{ left: '0' }} aria-label="Scroll Left">
+          &lt;
+        </ScrollButton>
+      )}
+      <ScrollButton onClick={() => handleScroll('next')} style={{ right: '0' }} aria-label="Scroll Right">
         &gt;
-      </button>
+      </ScrollButton> */}
 
-      <div 
-        style={{
-          display: 'flex',
-          overflowX: 'hidden',
-          whiteSpace: 'nowrap',
-          maxWidth: 'calc(5 * 155px + 4 * 8px + 460px)', // Ensure the container fits exactly 5 cards + margins
-          scrollbarWidth: 'none', // Hide scrollbar in Firefox
-          msOverflowStyle: 'none', // Hide scrollbar in IE and Edge
-          padding: '0 30px', // Add padding to ensure cards don't touch the buttons
-        }} 
-        ref={scrollRef}
-      >
+      <CardsContainer ref={scrollRef}>
         {genres.map((genre, index) => (
-          <Card 
-            key={index} 
+          <Card
+            key={index}
             sx={{
-              width:240,
-              height:180,
+              width: { xs: 150, sm: 160, md: 180, lg: 260 },
+              height: { xs: 140, sm: 150, md: 160, lg: 200 },
               margin: `0 ${8}px`,
-              flex: '0 0 auto', // Prevent cards from shrinking
-              position: 'relative',
-              borderRadius:'7px',
-
-
+              flex: "0 0 auto", // Prevent cards from shrinking
+              position: "relative",
+              borderRadius: "7px",
+              border: "none", // Remove border
+              boxShadow: "none",
+              overflow: "hidden", // Ensure no overflow is visible
+              backgroundColor: "transparent", // Ensure background color does not show any border effect
             }}
           >
-            <div style={{ position: 'relative' }}>
-              <CardMedia 
+            <div style={{ position: "relative" }}>
+              <CardMedia
                 component="img"
-                width="180"
-                height="140"
+                width="200"
+                height="auto"
                 image={genre.image}
                 alt={genre.name}
-                sx={{ objectFit: 'cover' }}
+                sx={{ objectFit: "cover", borderRadius: "inherit" }}
               />
               <Typography
                 variant="h5"
                 component="div"
                 sx={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  color: 'white',
-                  textAlign: 'center',
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  color: "white",
+                  textAlign: "center",
                   padding: 1,
-                  width: '100%',
+                  width: "100%",
                 }}
               >
                 {/* {genre.name} */}
               </Typography>
             </div>
-            <CardContent sx={{
-                backgroundColor:"black"
-              }}>
-              <Typography gutterBottom variant="body2" component="div"
-              sx={{color:"white",
-                textAlign: 'left',
-                 marginLeft:'-12px'
-              }}>
+            <CardContent sx={{ backgroundColor: "black" }}>
+              <Typography
+                gutterBottom
+                variant="body2"
+                component="div"
+                sx={{ color: "white", textAlign: "left", marginLeft: "-12px" }}
+              >
                 {genre.name}
               </Typography>
             </CardContent>
           </Card>
         ))}
-      </div>
-    </div>
+      </CardsContainer>
+    </StyledCardContainer>
   );
 }
