@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Home from './components/home/Home';
-import NavBar from './components/navbar/NavBar';
-import TVShows from './components/pages/TvShows';
-import Movies from './components/pages/Movies';
-import Premium from './components/pages/Premium';
-import News from './components/pages/News';
+import Home from './components/Home';
+import MainWindow from './components/MainWindow';
+import NavBar from './components/NavBar';
+import TVShows from './pages/TvShows';
+import Movies from './pages/Movies';
+import Premium from './pages/Premium';
+import News from './pages/News';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
                 <Route path="/movies" element={<Movies />} />
                 <Route path="/premium" element={<Premium />} />
                 <Route path="/news" element={<News />} />
+                <Route path="/mainwindow" element={<MainWindow />} />
             </Routes>
         </Router>
       </header>

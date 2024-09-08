@@ -8,33 +8,29 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 5rem;
-  background-color: var(--nav);
-  color: var(--white);
+  padding: 10px 20px;
+  background-color: #060606;
+  color: white;
   position: fixed;
-  top: 5px;
+  top: 0;
   left: 0;
   right: 0;
-  z-index: 500;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 30px;
 
   @media only screen and (max-width: 64em) {
-    /* Tablets and up */
     padding: 0.5rem 3rem;
     font-size: 20px;
-    margin-left: -30px;
-    margin-top: 10px;
   }
+
   @media only screen and (max-width: 40em) {
-    /* Mobile */
     padding: 0.5rem 1.5rem;
-    margin-left: 2px;
-    margin-top: -5px;
+    font-size: 16px;
   }
+
   @media only screen and (min-width: 90em) {
-    /* Laptop L 1440px and above */
-    padding: 1rem 7rem; /* Adjust the padding for larger screens */
-    margin-top: 10px;
-    margin-left: -73px; /* Adjust margin if needed */
+    padding: 1rem 7rem;
   }
 `;
 
@@ -46,61 +42,50 @@ const HeaderLeft = styled.div`
   a {
     font-weight: 600;
     line-height: 1.5;
-    color: var(--white);
+    color: white;
     text-decoration: none;
-    margin: 0 1rem;
+    margin: 0 30px;
 
     &:hover {
-      color: var(--purple);
+      color: rgb(117, 184, 246);
+      text-decoration: underline;
     }
 
-    /* Only hide links on mobile devices */
     @media only screen and (max-width: 40em) {
-      /* Mobile */
       display: none;
     }
   }
 
   @media only screen and (min-width: 40em) {
-    /* Tablets and larger screens */
-    display: flex;
-    align-items: center;
-  }
-  @media only screen and (min-width: 40em) {
-    /* Tablets and larger screens */
     font-weight: 600;
   }
 `;
 
 // Styling for the AppsIcon
 const MenuIcon = styled(AppsIcon)`
-  display: none; /* Hide on tablets and larger screens */
+  display: none;
 
   @media only screen and (max-width: 40em) {
-    /* Mobile */
-    display: flex; /* Show on mobile */
+    display: flex;
     height: 24px;
     cursor: pointer;
   }
+
   @media only screen and (min-width: 48em) {
-    /* Tablets and larger screens */
-    display: flex; /* Show on laptops and larger screens */
+    display: flex;
     height: 24px;
     cursor: pointer;
     margin-left: 17px;
-    margin-top: 2px;
   }
+
   @media only screen and (min-width: 64em) {
     font-size: 80px;
     height: 30px;
   }
 
   @media only screen and (min-width: 90em) {
-    /* Laptop L (1440px and above) */
-    font-size: 60px; /* Increase size */
-    height: 80px; /* Adjust height */
-    width: 30px;
-    margin-left: 20px; /* Align to the right if needed */
+    font-size: 60px;
+    height: 80px;
   }
 `;
 
@@ -112,11 +97,10 @@ const Icon = styled.div`
 `;
 
 const MobileNav = styled.div`
-  display: none; /* Hidden on larger screens */
+  display: none;
 
   @media only screen and (max-width: 40em) {
-    /* Mobile */
-    display: flex; /* Visible on mobile */
+    display: flex;
     justify-content: space-between;
     width: 100%;
     margin-top: 20px;
@@ -130,12 +114,7 @@ const MobileNav = styled.div`
 
 // Styling for the mobile menu, visible only on mobile devices
 const MobileMenu = styled.nav`
-  display: flex; /* Hidden on larger screens */
-
-  @media only screen and (max-width: 40em) {
-    /* Mobile */
-    display: flex; /* Visible on mobile */
-  }
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -152,7 +131,7 @@ const MobileMenu = styled.nav`
   visibility: ${(props) => (props.clicked ? "visible" : "hidden")};
 
   a {
-    color: var(--white);
+    color: white;
     font-weight: 600;
     font-size: 1.5rem;
     margin: 1.5rem;
@@ -176,49 +155,17 @@ const NavBar = () => {
         <Icon>
           <MenuIcon onClick={handleClick} />
         </Icon>
-        <MobileMenu clicked={click}>
-          <Link to="/" onClick={handleClick}>
-            Home
-          </Link>
-        </MobileMenu>
       </HeaderLeft>
-      {/* For mobile, Home on the left and MenuIcon on the right */}
       <MobileNav>
         <Link to="/">Home</Link>
-        <MenuIcon onClick={handleClick} /> {/* MenuIcon for mobile screens */}
+        <MenuIcon onClick={handleClick} />
       </MobileNav>
       <MobileMenu clicked={click}>
-        <Link to="/" onClick={handleClick} style={{ textDecoration: "none" }}>
-          Home
-        </Link>
-        <Link
-          to="/movies"
-          onClick={handleClick}
-          style={{ textDecoration: "none" }}
-        >
-          Movies
-        </Link>
-        <Link
-          to="/tv-shows"
-          onClick={handleClick}
-          style={{ textDecoration: "none" }}
-        >
-          TV Shows
-        </Link>
-        <Link
-          to="/premium"
-          onClick={handleClick}
-          style={{ textDecoration: "none" }}
-        >
-          Premium
-        </Link>
-        <Link
-          to="/news"
-          onClick={handleClick}
-          style={{ textDecoration: "none" }}
-        >
-          News
-        </Link>
+        <Link to="/" onClick={handleClick}>Home</Link>
+        <Link to="/movies" onClick={handleClick}>Movies</Link>
+        <Link to="/tv-shows" onClick={handleClick}>TV Shows</Link>
+        <Link to="/premium" onClick={handleClick}>Premium</Link>
+        <Link to="/news" onClick={handleClick}>News</Link>
       </MobileMenu>
     </Header>
   );

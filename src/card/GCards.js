@@ -4,6 +4,8 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+
 
 const StyledCardContainer = styled.div`
   position: relative;
@@ -56,6 +58,7 @@ const CardsContainer = styled.div`
 export default function GCards({ genres }) {
   const scrollRef = useRef(null);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const navigate = useNavigate(); // Initialize navigate function
 
   const handleScroll = (direction) => {
     if (scrollRef.current) {
@@ -83,6 +86,12 @@ export default function GCards({ genres }) {
     }
   }, []);
 
+  const handleCardClick = (genre) => {
+    if (genre.name === "News") {
+      navigate("/mainwindow"); // Navigate to MainWindow if the card is "News"
+    }
+  };
+
   return (
     <StyledCardContainer>
       {/* {scrollPosition > 0 && (
@@ -109,7 +118,10 @@ export default function GCards({ genres }) {
               boxShadow: "none",
               overflow: "hidden", // Ensure no overflow is visible
               backgroundColor: "transparent", // Ensure background color does not show any border effect
+              cursor:"pointer",
             }}
+            onClick={() => handleCardClick(genre)} // Handle card click
+
           >
             <div style={{ position: "relative" }}>
               <CardMedia
