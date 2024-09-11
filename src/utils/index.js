@@ -44,3 +44,45 @@ export async function getGenres() {
   const genres = await fetchJsonData("/genre.json");
   return genres;
 }
+
+export const captureClick = (event, layoutRef) => {
+    console.log("event",event, layoutRef?.current)
+    if(layoutRef?.current){
+    const element = layoutRef.current;
+
+  const { clientX, clientY } = event;
+
+  // Get the width and height of the video element
+  const videoWidth = element?.clientWidth;
+  const videoHeight = element?.clientHeight;
+
+  // Define the areas of each stitched video
+  const topVideoHeight = videoHeight * 0.7; // First video takes 80% of the height
+  const bottomVideosHeight = videoHeight * 0.3; // The remaining 20% is for the bottom 4 videos
+  const bottomVideoWidth = videoWidth / 5; // Each bottom video takes 1/4 of the width
+
+  let clickedVideo = '';
+
+  // Check if the click is within the top video
+  if (clientY <= topVideoHeight) {
+    clickedVideo = 'Top Video';
+  } else {
+    // Check which of the bottom 4 videos was clicked
+    const relativeX = clientX;
+    if (relativeX < bottomVideoWidth) {
+      clickedVideo = 'Bottom Video 1';
+    } else if (relativeX < bottomVideoWidth * 2) {
+      clickedVideo = 'Bottom Video 2';
+    } else if (relativeX < bottomVideoWidth * 3) {
+      clickedVideo = 'Bottom Video 3';
+    } else if (relativeX < bottomVideoWidth * 4) {
+        clickedVideo = 'Bottom Video 4';
+    } else {
+      clickedVideo = 'Bottom Video 5';
+    }
+  }
+
+  console.log(`Clicked on: ${clickedVideo}`, event, clientX, clientY, videoWidth, videoHeight, topVideoHeight, bottomVideoWidth);
+
+    }
+}
