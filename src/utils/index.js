@@ -45,7 +45,7 @@ export async function getGenres() {
   return genres;
 }
 
-export const captureClick = (event, layoutRef) => {
+export const captureClick = (event, layoutRef, setVideoIndex) => {
     console.log("event",event, layoutRef?.current)
     if(layoutRef?.current){
     const element = layoutRef.current;
@@ -70,15 +70,20 @@ export const captureClick = (event, layoutRef) => {
     // Check which of the bottom 4 videos was clicked
     const relativeX = clientX;
     if (relativeX < bottomVideoWidth) {
-      clickedVideo = 'Bottom Video 1';
+      clickedVideo = 'Bottom Video 0';
+      setVideoIndex(0);
     } else if (relativeX < bottomVideoWidth * 2) {
-      clickedVideo = 'Bottom Video 2';
+      clickedVideo = 'Bottom Video 1';
+      setVideoIndex(1);
     } else if (relativeX < bottomVideoWidth * 3) {
-      clickedVideo = 'Bottom Video 3';
+      clickedVideo = 'Bottom Video 2';
+      setVideoIndex(2);
     } else if (relativeX < bottomVideoWidth * 4) {
-        clickedVideo = 'Bottom Video 4';
+        clickedVideo = 'Bottom Video 3';
+        setVideoIndex(3);
     } else {
-      clickedVideo = 'Bottom Video 5';
+      clickedVideo = 'Bottom Video 4';
+      setVideoIndex(4);
     }
   }
 
