@@ -13,24 +13,15 @@ export async function fetchJsonData(path) {
   }
 }
 
-export async function getVideoCards() {
-  const videos = await fetchJsonData('/data/railCards.json');
+export async function getVideoCards(hlsUrls = []) {
 
-  if (videos && Array.isArray(videos)) {
-      return videos.map(video => {
-          if (video.url && video.url.endsWith('.m3u8')) {
-              return {
-                  ...video,
-                  isHls: true // Mark video as HLS if it is an m3u8 stream
-              };
-          } else {
-              return {
-                  ...video,
-                  isHls: false // Mark video as non-HLS otherwise
-              };
-          }
-      });
-  }
+  const videos = hlsUrls.map(url => ({
+    url, 
+    // title: `Video for ${url}`, 
+    isHls: true 
+  }));
+
+  console.log("Video url: ",videos.url);
 
   return videos;
 }
@@ -91,3 +82,44 @@ export const captureClick = (event, layoutRef, setVideoIndex) => {
 
     }
 }
+
+// export async function saveUrlsToJson(urls) {
+//   try {
+//     const response = await fetch('/data/railCards.json', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({ urls }), // Send the URLs as an array
+//     });
+
+//     if (!response.ok) {
+//       throw new Error(`Failed to save URLs: ${response.statusText}`);
+//     }
+
+//     const result = await response.json();
+//     console.log("Save url",result);
+//     return result; // Return the response (could be a success message)
+//   } catch (error) {
+//     console.error('Error saving URLs:', error);
+//     return null;
+//   }
+// }
+
+// // const addUrl = (index) => {
+// //   const newUrls = [...urls];
+// //   if (newUrls[index].url) {
+// //     newUrls[index].isAdded = true; // Mark the URL as added
+// //     setUrls(newUrls);
+
+// //     // Call the save function to post the URLs
+// //     const urlsToSave = newUrls.map(item => item.url); // Extract only the URLs
+// //     saveUrlsToJson(urlsToSave)
+// //       .then(result => {
+// //         if (result) {
+// //           console.log('URLs saved successfully:', result);
+// //         }
+// //       })
+// //       .catch(err => console.error('Failed to save URLs', err));
+// //   }
+// // };

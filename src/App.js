@@ -7,6 +7,7 @@ import TVShows from './pages/TvShows';
 import Movies from './pages/Movies';
 import Premium from './pages/Premium';
 import News from './pages/News';
+import Setting from './pages/Setting';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/premium" element={<Premium />} />
                 <Route path="/news" element={<News />} />
                 <Route path="/mainwindow" element={<MainWindow />} />
+                <Route path="/setting" element={<Setting />} />
             </Routes>
         </Router>
       </header>

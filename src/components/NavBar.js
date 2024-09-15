@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import AppsIcon from "@mui/icons-material/Apps";
+import SettingsIcon from '@mui/icons-material/Settings';
+import Setting from "../pages/Setting";
+import { margin } from "@mui/system";
 
 // Main header styling
 const Header = styled.header`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 10px 20px;
   background-color: #060606;
   color: white;
@@ -20,17 +22,25 @@ const Header = styled.header`
   font-size: 30px;
 
   @media only screen and (max-width: 64em) {
-    padding: 0.5rem 3rem;
-    font-size: 20px;
+    padding: 0;
+    top: 10px;
+    left: -10px;
+    font-size: 18px;
   }
 
   @media only screen and (max-width: 40em) {
     padding: 0.5rem 1.5rem;
+    left: 4px;
+    top: -5px;
     font-size: 16px;
+    justify-content: space-between;
   }
 
-  @media only screen and (min-width: 90em) {
-    padding: 1rem 7rem;
+  @media only screen and (max-width: 90em) {
+    padding: 0;
+    top: 10;
+    left: 0;
+    font-size: 30px;
   }
 `;
 
@@ -40,7 +50,8 @@ const HeaderLeft = styled.div`
   align-items: center;
 
   a {
-    font-weight: 600;
+ font-weight: 300;
+    font-size: 24px;
     line-height: 1.5;
     color: white;
     text-decoration: none;
@@ -53,20 +64,25 @@ const HeaderLeft = styled.div`
 
     @media only screen and (max-width: 40em) {
       display: none;
+    
     }
   }
 
   @media only screen and (min-width: 40em) {
-    font-weight: 600;
+ margin: 0 15px;
+    font-weight: 200;
+    font-size: 18px;
+    margin-right: -10px;
   }
 `;
 
-// Styling for the AppsIcon
-const MenuIcon = styled(AppsIcon)`
+const MenuIcon = styled(SettingsIcon)`
   display: none;
 
   @media only screen and (max-width: 40em) {
     display: flex;
+    margin-right: 10px;
+    margin-top: 7px;
     height: 24px;
     cursor: pointer;
   }
@@ -76,16 +92,22 @@ const MenuIcon = styled(AppsIcon)`
     height: 24px;
     cursor: pointer;
     margin-left: 17px;
+    margin-top: 7px;
+    margin-right: 10px;
   }
 
   @media only screen and (min-width: 64em) {
     font-size: 80px;
     height: 30px;
+    margin-top: 7px;
+    margin-right: 10px;
   }
 
   @media only screen and (min-width: 90em) {
     font-size: 60px;
     height: 80px;
+    margin-top: 7px;
+    margin-right: 10px;
   }
 `;
 
@@ -101,9 +123,11 @@ const MobileNav = styled.div`
 
   @media only screen and (max-width: 40em) {
     display: flex;
+    font-size:22px;
     justify-content: space-between;
     width: 100%;
     margin-top: 20px;
+    margin-left:10px;
 
     a {
       text-decoration: none;
@@ -121,8 +145,8 @@ const MobileMenu = styled.nav`
   padding: 2rem 0;
   position: absolute;
   top: 100%;
-  left: 0;
-  right: 0;
+  // left: 0;
+  right: 20px;
   background-color: rgb(53 53 63 / 95%);
   border-radius: 20px;
   transition: opacity 0.5s, visibility 0.5s;
@@ -136,7 +160,13 @@ const MobileMenu = styled.nav`
     font-size: 1.5rem;
     margin: 1.5rem;
     cursor: pointer;
+  
   }
+    @media (max-width: 480px){
+        position: flex;
+        
+    }
+
 `;
 
 const NavBar = () => {
@@ -152,20 +182,24 @@ const NavBar = () => {
         <Link to="/tv-shows">TV Shows</Link>
         <Link to="/premium">Premium</Link>
         <Link to="/news">News</Link>
-        <Icon>
+        {/* <Icon>
+          <MenuIcon onClick={handleClick} />
+        </Icon> */}
+      </HeaderLeft>
+      <Icon>
           <MenuIcon onClick={handleClick} />
         </Icon>
-      </HeaderLeft>
       <MobileNav>
         <Link to="/">Home</Link>
         <MenuIcon onClick={handleClick} />
       </MobileNav>
       <MobileMenu clicked={click}>
-        <Link to="/" onClick={handleClick}>Home</Link>
+        {/* <Link to="/" onClick={handleClick}>Home</Link>
         <Link to="/movies" onClick={handleClick}>Movies</Link>
         <Link to="/tv-shows" onClick={handleClick}>TV Shows</Link>
         <Link to="/premium" onClick={handleClick}>Premium</Link>
-        <Link to="/news" onClick={handleClick}>News</Link>
+        <Link to="/news" onClick={handleClick}>News</Link> */}
+      <Setting style={{"margin-right":"-10px"}}/>
       </MobileMenu>
     </Header>
   );
