@@ -26,14 +26,14 @@ const ScrollButton = styled.button`
 
 const CardsContainer = styled.div`
   display: flex;
-  overflow-x: hidden;
+  overflow-x: auto;
   white-space: nowrap;
   padding: 0 30px;
 
   // Responsiveness: Adjust the number of visible cards based on the screen size
   // max-width: calc(1 * 150px + 50px); // Default for small screens
 
-  // @media (min-width: 600px) {
+   @media (max-width: 600px) {
   max-width: calc(
     2 * 160px + 1 * 8px + 40px
   ); // 2 cards for larger mobile devices
@@ -94,14 +94,14 @@ export default function GCards({ genres }) {
 
   return (
     <StyledCardContainer>
-      {/* {scrollPosition > 0 && (
+      {scrollPosition > 0 && (
         <ScrollButton onClick={() => handleScroll('prev')} style={{ left: '0' }} aria-label="Scroll Left">
           &lt;
         </ScrollButton>
       )}
       <ScrollButton onClick={() => handleScroll('next')} style={{ right: '0' }} aria-label="Scroll Right">
         &gt;
-      </ScrollButton> */}
+      </ScrollButton>
 
       <CardsContainer ref={scrollRef}>
         {genres.map((genre, index) => (

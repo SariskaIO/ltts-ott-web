@@ -82,7 +82,8 @@ const VideoContainer = styled.div`
 const Video = styled.video`
       object-fit: contain;
    width: 100%;
-   height: auto;
+   height: 100vh;
+   margin-top: 20px;
    max-height: 100%;
 
 
@@ -164,7 +165,7 @@ const MainWindow = () => {
   const videoRef = useRef(null);
   const railCardsRef = useRef(null);
   const containerRef = useRef(null);
-  const hlsUrls = useSelector((state) => state.hls.urls) || [];
+  const hlsUrls = useSelector(state => state.hls.urls) || [];
   const [selectedUrl, setSelectedUrl] = useState(hlsUrls[0] || '');
 
   // useEffect(() => {
@@ -201,11 +202,19 @@ const MainWindow = () => {
   }, [videoIndex,videos]);
 
   useEffect(() => {
+    console.log('hlsUrls from Redux:', hlsUrls); // For debugging
+    setSelectedUrl(hlsUrls[0] || '');
+  }, [hlsUrls]);
+  
+
+  useEffect(() => {
     let hls;
     const playVideo = () => {
+      if (videoRef.current) {
       videoRef.current.play().catch((error) => {
         console.error("Autoplay failed:", error);
       });
+    }
     };
 
     if (selectedVideo && videoRef.current) {
@@ -246,20 +255,21 @@ const MainWindow = () => {
     //     }
     //   };
     // }
-  }, [selectedUrl]);
+  }, [selectedUrl,selectedVideo]);
 
   const selectVideo = (video) => {
     setSelectedVideo(video);
     setSelectedUrl(video.url);
-    setTimeout(() => {
-      showRailCardsWithTimer();
-    }, 0);
+    // setTimeout(() => {
+    //   showRailCardsWithTimer();
+    // }, 0);
   };
 
+  let timer;
   const showRailCardsWithTimer = () => {
     setShowRailCards(true);
     clearTimeout();
-    const timer = setTimeout(() => {
+    timer = setTimeout(() => {
       if (railCardsRef.current && !railCardsRef.current.matches(":hover")) {
         setShowRailCards(false);
       }
@@ -271,10 +281,14 @@ const MainWindow = () => {
     clearTimeout();
   };
 
-  const handleRailCardsMouseEnter = () => {
-    clearTimeout();
-  };
+  // const handleRailCardsMouseEnter = () => {
+  //   clearTimeout();
+  // };
 
+  useEffect(() => {
+    return () => clearTimeout(timer);
+  }, []);
+  
   const handleRailCardsMouseLeave = () => {
     showRailCardsWithTimer();
   };

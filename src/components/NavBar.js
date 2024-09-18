@@ -147,12 +147,14 @@ const MobileMenu = styled.nav`
   top: 100%;
   // left: 0;
   right: 20px;
-  background-color: rgb(53 53 63 / 95%);
+  // background-color: rgb(53 53 63 / 95%);
+  background-color: rgb(43, 11, 42 ,0.9);
+  // backdrop-filter:  rgb(43, 11, 42) blur(10px);
   border-radius: 20px;
   transition: opacity 0.5s, visibility 0.5s;
   z-index: 1000;
-  opacity: ${(props) => (props.clicked ? "1" : "0")};
-  visibility: ${(props) => (props.clicked ? "visible" : "hidden")};
+  opacity: ${(props) => (props['clicked'] === 'true' ? "1" : "0")};
+  visibility: ${(props) => (props['clicked'] === 'true' ? "visible" : "hidden")};
 
   a {
     color: white;
@@ -193,7 +195,7 @@ const NavBar = () => {
         <Link to="/">Home</Link>
         <MenuIcon onClick={handleClick} />
       </MobileNav>
-      <MobileMenu clicked={click}>
+      <MobileMenu clicked={click ? 'true' : 'false'}>
         {/* <Link to="/" onClick={handleClick}>Home</Link>
         <Link to="/movies" onClick={handleClick}>Movies</Link>
         <Link to="/tv-shows" onClick={handleClick}>TV Shows</Link>

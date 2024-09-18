@@ -35,53 +35,42 @@ export async function getGenres() {
   const genres = await fetchJsonData("/genre.json");
   return genres;
 }
-
-export const captureClick = (event, layoutRef, setVideoIndex) => {
-    console.log("event",event, layoutRef?.current)
-    if(layoutRef?.current){
+export const captureClick = (event, layoutRef, setVideoIndex, availableBottomVideos) => {
+  console.log("event", event, layoutRef?.current);
+  
+  if (layoutRef?.current && availableBottomVideos > 0) {
     const element = layoutRef.current;
+    const { clientX, clientY } = event;
 
-  const { clientX, clientY } = event;
+    const videoWidth = element.clientWidth;
+    const videoHeight = element.clientHeight;
 
-  // Get the width and height of the video element
-  const videoWidth = element?.clientWidth;
-  const videoHeight = element?.clientHeight;
+    const topVideoHeight = videoHeight * 0.7;  // Top video occupies 70% of height
+    const bottomVideosHeight = videoHeight * 0.3;  // Bottom videos occupy 30% of height
 
-  // Define the areas of each stitched video
-  const topVideoHeight = videoHeight * 0.7; // First video takes 80% of the height
-  const bottomVideosHeight = videoHeight * 0.3; // The remaining 20% is for the bottom 4 videos
-  const bottomVideoWidth = videoWidth / 5; // Each bottom video takes 1/4 of the width
+    let clickedVideo = '';
 
-  let clickedVideo = '';
-
-  // Check if the click is within the top video
-  if (clientY <= topVideoHeight) {
-    clickedVideo = 'Top Video';
-  } else {
-    // Check which of the bottom 4 videos was clicked
-    const relativeX = clientX;
-    if (relativeX < bottomVideoWidth) {
-      clickedVideo = 'Bottom Video 0';
-      setVideoIndex(0);
-    } else if (relativeX < bottomVideoWidth * 2) {
-      clickedVideo = 'Bottom Video 1';
-      setVideoIndex(1);
-    } else if (relativeX < bottomVideoWidth * 3) {
-      clickedVideo = 'Bottom Video 2';
-      setVideoIndex(2);
-    } else if (relativeX < bottomVideoWidth * 4) {
-        clickedVideo = 'Bottom Video 3';
-        setVideoIndex(3);
+    // Check if clicked in the top video area
+    if (clientY <= topVideoHeight) {
+      clickedVideo = 'Top Video';
     } else {
-      clickedVideo = 'Bottom Video 4';
-      setVideoIndex(4);
+      // Calculate dynamic width for each bottom video based on the number of videos
+      const bottomVideoWidth = videoWidth / availableBottomVideos;
+
+      // Determine which bottom video was clicked based on X position
+      const relativeX = clientX;
+      for (let i = 0; i < availableBottomVideos; i++) {
+        if (relativeX >= bottomVideoWidth * i && relativeX < bottomVideoWidth * (i + 1)) {
+          clickedVideo = `Bottom Video ${i}`;
+          setVideoIndex(i);  // Set the video index to the clicked one
+          break;
+        }
+      }
     }
+
+    console.log(`Clicked on: ${clickedVideo}`, event, clientX, clientY, videoWidth, videoHeight, topVideoHeight);
   }
-
-  console.log(`Clicked on: ${clickedVideo}`, event, clientX, clientY, videoWidth, videoHeight, topVideoHeight, bottomVideoWidth);
-
-    }
-}
+};
 
 // export async function saveUrlsToJson(urls) {
 //   try {
