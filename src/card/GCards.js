@@ -90,6 +90,9 @@ export default function GCards({ genres }) {
     if (genre.name === "News") {
       navigate("/mainwindow"); // Navigate to MainWindow if the card is "News"
     }
+    if (genre.name === "Entertainment") {
+      navigate("/entertainment"); // Navigate to MainWindow if the card is "News"
+    }
   };
 
   return (

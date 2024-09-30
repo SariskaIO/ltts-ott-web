@@ -21,8 +21,6 @@ export async function getVideoCards(hlsUrls = []) {
     isHls: true 
   }));
 
-  console.log("Video url: ",videos.url);
-
   return videos;
 }
 
@@ -36,7 +34,6 @@ export async function getGenres() {
   return genres;
 }
 export const captureClick = (event, layoutRef, setVideoIndex, availableBottomVideos) => {
-  console.log("event", event, layoutRef?.current);
   
   if (layoutRef?.current && availableBottomVideos > 0) {
     const element = layoutRef.current;
@@ -67,8 +64,6 @@ export const captureClick = (event, layoutRef, setVideoIndex, availableBottomVid
         }
       }
     }
-
-    console.log(`Clicked on: ${clickedVideo}`, event, clientX, clientY, videoWidth, videoHeight, topVideoHeight);
   }
 };
 

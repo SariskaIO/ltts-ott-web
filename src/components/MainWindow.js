@@ -186,7 +186,6 @@ const MainWindow = () => {
     const fetchVideos = async () => {
       const videoCards = await getVideoCards(hlsUrls);
       setVideos(videoCards);
-      console.log("Videocard url:",videoCards);
     };
 
     fetchVideos();
@@ -202,7 +201,6 @@ const MainWindow = () => {
   }, [videoIndex,videos]);
 
   useEffect(() => {
-    console.log('hlsUrls from Redux:', hlsUrls); // For debugging
     setSelectedUrl(hlsUrls[0] || '');
   }, [hlsUrls]);
   
@@ -323,21 +321,11 @@ const MainWindow = () => {
       }
     }
   };
-  console.log(
-    "demo",
-    containerRef?.current,
-    videoIndex,
-    videos,
-    videoIndex,
-    selectedVideo
-  );
+  
 
   return (
     <Container
       onClick={(event) => handleContainerClick(event, containerRef)} // Unmute on click
-      onMouseEnter={() => setShowToggleButton(true)}
-      onMouseLeave={() => setShowToggleButton(false)}
-      onDoubleClick={handleDoubleClick} // Trigger full-screen on double-click
       ref={containerRef}
     >
       {selectedVideo ? (
