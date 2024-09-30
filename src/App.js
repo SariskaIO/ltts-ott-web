@@ -8,6 +8,7 @@ import Movies from './pages/Movies';
 import Premium from './pages/Premium';
 import News from './pages/News';
 import Setting from './pages/Setting';
+import Entertainment from './views/Entertainment';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/news" element={<News />} />
                 <Route path="/mainwindow" element={<MainWindow />} />
                 <Route path="/setting" element={<Setting />} />
+                <Route path="/entertainment" element={<Entertainment />} />
             </Routes>
         </Router>
       </header>

@@ -52,7 +52,7 @@ const CardsContainer = styled.div`
     max-width: calc(4 * 170px + 3 * 8px + 50px); // 3 cards for tablets
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 900px) {
     max-width: calc(5 * 180px + 4 * 8px + 80px); // 4 cards for laptops
   }
 

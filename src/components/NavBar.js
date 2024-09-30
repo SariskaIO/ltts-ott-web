@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import SettingsIcon from '@mui/icons-material/Settings';
+
+import ChatIcon from '@mui/icons-material/Chat';
 import Setting from "../pages/Setting";
-import { margin } from "@mui/system";
+import { Box, margin } from "@mui/system";
+import DrawerBox from "./DrawerBox";
 
 // Main header styling
 const Header = styled.header`
@@ -111,6 +114,41 @@ const MenuIcon = styled(SettingsIcon)`
   }
 `;
 
+const ChatsIcon = styled(ChatIcon)`
+  display: none;
+
+  @media only screen and (max-width: 40em) {
+    display: flex;
+    margin-right: 10px;
+    margin-top: 7px;
+    height: 24px;
+    cursor: pointer;
+  }
+
+  @media only screen and (min-width: 48em) {
+    display: flex;
+    height: 24px;
+    cursor: pointer;
+    margin-left: 17px;
+    margin-top: 7px;
+    margin-right: 10px;
+  }
+
+  @media only screen and (min-width: 64em) {
+    font-size: 80px;
+    height: 30px;
+    margin-top: 7px;
+    margin-right: 10px;
+  }
+
+  @media only screen and (min-width: 90em) {
+    font-size: 60px;
+    height: 80px;
+    margin-top: 7px;
+    margin-right: 10px;
+  }
+`;
+
 const Icon = styled.div`
   display: flex;
   @media only screen and (max-width: 40em) {
@@ -176,6 +214,13 @@ const NavBar = () => {
 
   const handleClick = () => setClick(!click);
 
+  const [open, setOpen] = useState(false);
+  
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
+
+
   return (
     <Header>
       <HeaderLeft>
@@ -188,9 +233,15 @@ const NavBar = () => {
           <MenuIcon onClick={handleClick} />
         </Icon> */}
       </HeaderLeft>
+      <Box sx={{display: 'flex'}}>
+        <Icon>
+        <ChatsIcon onClick={toggleDrawer(true)} />
+        </Icon>
+        <DrawerBox toggleDrawer={toggleDrawer} open={open} />
       <Icon>
           <MenuIcon onClick={handleClick} />
         </Icon>
+        </Box>
       <MobileNav>
         <Link to="/">Home</Link>
         <MenuIcon onClick={handleClick} />
@@ -201,6 +252,8 @@ const NavBar = () => {
         <Link to="/tv-shows" onClick={handleClick}>TV Shows</Link>
         <Link to="/premium" onClick={handleClick}>Premium</Link>
         <Link to="/news" onClick={handleClick}>News</Link> */}
+
+      <DrawerBox toggleDrawer={toggleDrawer} open={open} />
       <Setting style={{"margin-right":"-10px"}}/>
       </MobileMenu>
     </Header>
