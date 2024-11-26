@@ -1,20 +1,82 @@
-import React, { useState } from 'react'
-import HlsPlayer from '../../components/meet/HLSPlayer'
-import DrawerBox from '../../components/DrawerBox'
+// import React, { useState } from 'react'
+// import HlsPlayer from '../../components/meet/HLSPlayer'
+// import DrawerBox from '../../components/DrawerBox'
+
+// const Entertainment = () => {
+//   return (
+//     <div>
+//         <HlsPlayer
+//             src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" // Replace with your .m3u8 URL
+//             autoPlay={true}
+//             controls={false}
+//         />
+//     </div>
+//   )
+// }
+
+// export default Entertainment;
+
+  
+import React, { useRef, useEffect } from "react";
+import HlsPlayer from "../../components/meet/HLSPlayer";
 
 const Entertainment = () => {
-  return (
-    <div>
-        <HlsPlayer
-            src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" // Replace with your .m3u8 URL
-            autoPlay={true}
-            controls={true}
-        />
-    </div>
-  )
-}
+  const videoRef = useRef(null);
 
-export default Entertainment
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.play();
+    }
+  }, []);
+
+  const handleDoubleClick = () => {
+    const video = videoRef.current;
+    if (video) {
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.mozRequestFullScreen) {
+        video.mozRequestFullScreen();
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen();
+      }
+    }
+  };
+
+  return (
+    <div
+      style={{
+        width: "100%",
+        height: "100vh",
+        overflow: "hidden",
+        background: "#000",
+      }}
+      onDoubleClick={handleDoubleClick} 
+    >
+      <HlsPlayer
+        ref={videoRef}
+        src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" 
+        autoPlay={true}
+        controls={false} 
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover", 
+        }}
+      />
+    </div>
+  );
+};
+
+export default Entertainment;
+
+
+
+
+
+
 // import React, { useEffect, useRef, useState } from "react";
 // import styled from "styled-components";
 // import Hls from "hls.js";
