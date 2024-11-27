@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import SettingsIcon from '@mui/icons-material/Settings';
-
+import PictureInPictureAltIcon from "@mui/icons-material/PictureInPictureAlt";
 import ChatIcon from '@mui/icons-material/Chat';
 import Setting from "../pages/Setting";
 import { Box, margin } from "@mui/system";
 import DrawerBox from "./DrawerBox";
+
+
 
 // Main header styling
 const Header = styled.header`
@@ -206,11 +208,72 @@ const MobileMenu = styled.nav`
         position: flex;
         
     }
+        
 
 `;
 
+const PIPIcon = styled(PictureInPictureAltIcon)`
+  display: none;
+
+  @media only screen and (max-width: 40em) {
+    display: flex;
+    margin-right: 10px;
+    margin-top: 7px;
+    height: 24px;
+    cursor: pointer;
+  }
+
+  @media only screen and (min-width: 48em) {
+    display: flex;
+    height: 24px;
+    cursor: pointer;
+    margin-left: 17px;
+    margin-top: 7px;
+    margin-right: 10px;
+  }
+
+  @media only screen and (min-width: 64em) {
+    font-size: 80px;
+    height: 30px;
+    margin-top: 7px;
+    margin-right: 10px;
+  }
+
+  @media only screen and (min-width: 90em) {
+    font-size: 60px;
+    height: 80px;
+    margin-top: 7px;
+    margin-right: 10px;
+  }
+`;
+const IframeContainer = styled.div`
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 360px;
+  height: 420px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 10000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 300px;
+    height: 360px;
+  }
+`;
+
+
 const NavBar = () => {
   const [click, setClick] = useState(false);
+  const [showIframe, setShowIframe] = useState(false); // Manage iframe visibility
 
   const handleClick = () => setClick(!click);
 
@@ -219,6 +282,10 @@ const NavBar = () => {
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
+ // Toggle iframe visibility
+ const toggleIframe = () => {
+  setShowIframe((prev) => !prev);
+};
 
 
   return (
@@ -234,28 +301,32 @@ const NavBar = () => {
         </Icon> */}
       </HeaderLeft>
       <Box sx={{display: 'flex'}}>
-        <Icon>
-        <ChatsIcon onClick={toggleDrawer(true)} />
+      <Icon>
+      <PIPIcon onClick={toggleIframe} /> {/* Toggle iframe */}
+      <ChatsIcon onClick={toggleDrawer(true)} />
         </Icon>
         <DrawerBox toggleDrawer={toggleDrawer} open={open} />
       <Icon>
           <MenuIcon onClick={handleClick} />
         </Icon>
-        </Box>
+      </Box>
       <MobileNav>
         <Link to="/">Home</Link>
         <MenuIcon onClick={handleClick} />
       </MobileNav>
       <MobileMenu clicked={click ? 'true' : 'false'}>
-        {/* <Link to="/" onClick={handleClick}>Home</Link>
-        <Link to="/movies" onClick={handleClick}>Movies</Link>
-        <Link to="/tv-shows" onClick={handleClick}>TV Shows</Link>
-        <Link to="/premium" onClick={handleClick}>Premium</Link>
-        <Link to="/news" onClick={handleClick}>News</Link> */}
-
       <DrawerBox toggleDrawer={toggleDrawer} open={open} />
       <Setting style={{"margin-right":"-10px"}}/>
       </MobileMenu>
+       {/* Conditionally render the iframe */}
+       {showIframe && (
+        <IframeContainer>
+          <iframe
+            allow="camera; microphone; fullscreen; speaker; display-capture"
+            src={"https://meet.sariska.io/"}
+          ></iframe>
+        </IframeContainer>
+      )}
     </Header>
   );
 };
